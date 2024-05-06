@@ -18,8 +18,8 @@ else
 fi
 
 # Apply Terraform configuration
-echo "Applying Terraform configuration for the development environment..."
-terraform apply -var-file="prod.tfvars" -auto-approve
+echo "Applying Terraform configuration for the production environment..."
+terraform apply -auto-approve
 
 if [ $? -eq 0 ]; then
     echo "Terraform configuration applied successfully."

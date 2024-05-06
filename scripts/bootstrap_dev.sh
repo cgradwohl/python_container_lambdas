@@ -19,7 +19,7 @@ fi
 
 # Apply Terraform configuration
 echo "Applying Terraform configuration for the development environment..."
-terraform apply -var-file="dev.tfvars" -auto-approve
+terraform apply -auto-approve
 
 if [ $? -eq 0 ]; then
     echo "Terraform configuration applied successfully."

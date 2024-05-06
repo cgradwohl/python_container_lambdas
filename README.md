@@ -22,6 +22,7 @@ We need to create the following:
 
 - S3 bucket for the Terraform backend
 - DynamoDB table for Terraform state locking and consistency
-- IAM role that has permissions to set up the Amazon S3 backend for Terraform
 
-To create these resource for the remote backend, I will create a separate folder called remote_backend outside of the main terraform folder.
+To create these resource for the remote backend, I will create a separate folder called terraform_backend outside of the main terraform folder. I then create a dev and prod folder for each environment, as well as some scripts to bootstrap each environment.
+
+Now that the S3 and DynmoDB resource are created we need to create an IAM role that has permissions to set up the Amazon S3 backend for Terraform.
