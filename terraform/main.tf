@@ -7,8 +7,7 @@ terraform {
 
   backend "s3" {
     encrypt = true
-    assume_role = {
-      role_arn = "value"
-    }
   }
 }
+
+
