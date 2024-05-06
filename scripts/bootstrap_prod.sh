@@ -35,17 +35,17 @@ BUCKET_NAME=$(terraform output -raw terraform_state_bucket_name)
 if [ $? -eq 0 ] && [ -n "$BUCKET_NAME" ]; then
     echo "Retrieved bucket name: $BUCKET_NAME"
     
-    # Check if prod.tfvars exists, create if it does not
+    # Specify the correct path to dev.tfvars
     TFVARS_PATH="../../terraform/environments/prod.tfvars"
     if [ ! -f "$TFVARS_PATH" ]; then
-        echo "Creating dev.tfvars since it does not exist."
+        echo "Creating prod.tfvars since it does not exist."
         touch "$TFVARS_PATH"
     fi
     
-    # Append the bucket name to the dev.tfvars file
-    echo "state_bucket_name = \"$BUCKET_NAME\"" >> "$TFVARS_PATH"
-    echo "Bucket name appended to prod.tfvars file."
+    # Write/overwrite the bucket name in the dev.tfvars file
+    echo "state_bucket_name = \"$BUCKET_NAME\"" > "$TFVARS_PATH"
+    echo "Bucket name written to prod.tfvars file."
 else
-    echo "Failed to retrieve or append the bucket name." 1>&2
+    echo "Failed to retrieve or write the bucket name." 1>&2
     exit 1
 fi

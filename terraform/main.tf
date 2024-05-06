@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "dev-tfstate-bucket-cgx31dmm"
+    bucket = var.state_bucket_name
     key    = "path/to/my/key"
     region = var.aws_region
   }
