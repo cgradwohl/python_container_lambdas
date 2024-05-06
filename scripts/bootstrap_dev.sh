@@ -30,6 +30,7 @@ fi
 
 # Retrieve the output of the S3 bucket name
 BUCKET_NAME=$(terraform output -raw terraform_state_bucket_name)
+TABLE_NAME=$(terraform output -raw terraform_state_locktable_name)
 
 # Check if the output command succeeded and the bucket name is not empty
 if [ $? -eq 0 ] && [ -n "$BUCKET_NAME" ]; then
@@ -43,7 +44,9 @@ if [ $? -eq 0 ] && [ -n "$BUCKET_NAME" ]; then
     fi
     
     # Write/overwrite the bucket name in the dev.tfvars file
-    echo "state_bucket_name = \"$BUCKET_NAME\"" > "$TFVARS_PATH"
+    echo "aws_region = \"us-west-1\"" > "$TFVARS_PATH"
+    echo "state_bucket_name = \"$BUCKET_NAME\"" >> "$TFVARS_PATH"
+    echo "state_locktable_name = \"$TABLE_NAME\"" >> "$TFVARS_PATH"
     echo "Bucket name written to dev.tfvars file."
 else
     echo "Failed to retrieve or write the bucket name." 1>&2

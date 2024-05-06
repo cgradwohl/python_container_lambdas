@@ -1,7 +1,14 @@
 terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+    }
+  }
+
   backend "s3" {
-    bucket = var.state_bucket_name
-    key    = "path/to/my/key"
-    region = var.aws_region
+    encrypt = true
+    assume_role = {
+      role_arn = "value"
+    }
   }
 }
